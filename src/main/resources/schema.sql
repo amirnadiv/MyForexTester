@@ -8,6 +8,6 @@ CREATE TABLE IF NOT EXISTS GBPJPY (
                          low   DOUBLE ,
                          open  DOUBLE ,
                          close DOUBLE ,
-                         quantity int ,
+                         volume int ,
                          PRIMARY KEY (id)
 );

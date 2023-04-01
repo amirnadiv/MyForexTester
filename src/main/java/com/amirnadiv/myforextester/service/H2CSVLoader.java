@@ -12,6 +12,7 @@ public class H2CSVLoader {
 
         Class.forName("org.h2.Driver");
         conn = DriverManager.getConnection("jdbc:h2:~/test", "", "");
+        conn.setAutoCommit(true);
         stmt = conn.createStatement();
 
         stmt.execute("drop table if exists GBPJPY");
@@ -23,17 +24,22 @@ public class H2CSVLoader {
                 "                         low   DOUBLE ,\n" +
                 "                         open  DOUBLE ,\n" +
                 "                         close DOUBLE ,\n" +
-                "                         quantity int ,\n" +
+                "                         volume int ,\n" +
                 "                         PRIMARY KEY (id)\n" +
                 ")");
-        stmt.execute("insert into GBPJPY ( date,time,high,low,open,close,quantity ) " +
-                "select  \"date\",  \"time\", \"high\", \"low\", \"open\", \"close\",\"quantity\"  " +
-                " from CSVREAD( 'C:\\JAVA_PROJECTS\\MyForexTester\\src\\main\\resources\\data\\GBPJPY_2023_01.csv', 'date,time,high,low,open,close,quantity', null ) ");
-        ResultSet rs = stmt.executeQuery("select * from GBPJPY");
+        stmt.execute("insert into GBPJPY ( date,time,high,low,open,close,volume ) " +
+                "select  \"date\",  \"time\", \"high\", \"low\", \"open\", \"close\",\"volume\"  " +
+                " from CSVREAD( 'C:\\JAVA_PROJECTS\\MyForexTester\\src\\main\\resources\\data\\GBPJPY_2023_01.csv', 'date,time,high,low,open,close,volume', null ) " +
+                "commit ;" );
 
-        while (rs.next()) {
-            //System.out.println("id " + rs.getInt("id") + " name " + rs.getString("name") + " age " + rs.getInt("age"));
-        }
+//        ResultSet rs = stmt.executeQuery("select * from GBPJPY");
+//
+//        while (rs.next()) {
+//            System.out.println("id " + rs.getInt("id") + " date " + rs.getString("date") + " time " + rs.getString("time"));
+//        }
+
+        conn.commit();
         stmt.close();
+        conn.close();
     }
 }
