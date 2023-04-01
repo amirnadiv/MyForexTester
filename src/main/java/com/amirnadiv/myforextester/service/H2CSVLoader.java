@@ -11,7 +11,7 @@ public class H2CSVLoader {
         Statement stmt = null;
 
         Class.forName("org.h2.Driver");
-        conn = DriverManager.getConnection("jdbc:h2:~/test", "", "");
+        conn = DriverManager.getConnection("jdbc:h2:mem:Test", "sa", "");
         conn.setAutoCommit(true);
         stmt = conn.createStatement();
 
