@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @SpringBootApplication
 public class MyForexTesterApplication {
@@ -18,7 +19,7 @@ public class MyForexTesterApplication {
     @Autowired
     static ForexDataService forexDataService;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         SpringApplication.run(MyForexTesterApplication.class, args);
         ApplicationContext context = new AnnotationConfigApplicationContext(MyForexTesterConfiguration.class);
         ForexDataService forexDataService = context.getBean(ForexDataService.class);
