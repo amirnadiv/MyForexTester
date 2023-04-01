@@ -13,11 +13,14 @@ public class ForexDataService {
 
     public void initDataAfterStartup() throws IOException {
 
+        Stream<Path> allPathsOfData = getAllPathsOfData();
+
+
+    }
+
+    private Stream<Path> getAllPathsOfData() throws IOException {
         Stream<Path> paths = Files.walk(Paths.get("C:\\JAVA_PROJECTS\\MyForexTester\\src\\main\\resources\\data"));
-            paths
-                    .filter(Files::isRegularFile)
-                    .forEach(System.out::println);
-
-
+        paths.filter(Files::isRegularFile).forEach(System.out::println);
+        return paths;
     }
 }

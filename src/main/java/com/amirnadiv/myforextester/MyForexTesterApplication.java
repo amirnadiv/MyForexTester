@@ -20,12 +20,8 @@ public class MyForexTesterApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(MyForexTesterApplication.class, args);
-
-
         ApplicationContext context = new AnnotationConfigApplicationContext(MyForexTesterConfiguration.class);
         ForexDataService forexDataService = context.getBean(ForexDataService.class);
-
-
         forexDataService.initDataAfterStartup();
     }
 
