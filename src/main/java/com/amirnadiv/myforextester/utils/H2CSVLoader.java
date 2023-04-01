@@ -1,4 +1,4 @@
-package com.amirnadiv.myforextester.service;
+package com.amirnadiv.myforextester.utils;
 
 import java.nio.file.Path;
 import java.sql.*;
